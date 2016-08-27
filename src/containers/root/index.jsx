@@ -1,15 +1,44 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class Root extends Component {
-  propTypes: {
-    children: PropTypes.element.isRequired
-  }
+import Home from '../home/index.jsx';
+import * as Actions from '../../actions'
 
-  render() {
+class Root extends Component {
+  render () {
+    const { view, salt, actions } = this.props;
+    console.log(view, salt, actions)
     return (
-      <div>
-        {this.props.children}
+      <div id="root-container">
+        {view === 'home' &&
+          <Home actions={{ submitSalt: actions.submitSalt }} salt={salt} />
+        }
       </div>
     );
   }
 }
+
+Root.propTypes = {
+  view: PropTypes.string.isRequired,
+  salt: PropTypes.string.isRequired,
+  actions: PropTypes.object.isRequired
+}
+
+function mapStateToProps (state) {
+  return {
+    view: state.salt.view,
+    salt: state.salt.salt
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Root)

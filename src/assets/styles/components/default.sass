@@ -14,3 +14,35 @@ input.input-default
   font-size: 15px
   height: 45px
   color: $white
+
+/* Hidding the radiobuttons & checkboxes */
+input[type="radio"],
+input[type="checkbox"]
+  display: none
+
+/* Hidding the "check" status of inputs */
+input[type="radio"] + label .fa-circle,
+input[type="checkbox"] + label .fa-check
+  display: none
+
+/* Styling the "check" status */
+input[type="radio"]:checked + label .fa-circle,
+input[type="checkbox"]:checked + label .fa-check
+  display: block
+  color: $deep-orange-700
+
+/* Styling checkboxes */
+input[type="checkbox"]:checked + label .fa-check
+  position: relative
+  left: .125em
+  bottom: .125em
+
+/* Styling radiobuttons */
+input[type="radio"]:checked + label .fa-circle-o
+  display: none
+
+input[type="checkbox"] + label,
+input[type="radio"] + label
+  color: $grey-300
+  cursor: pointer
+  font-family: 'Electrolize', sans-serif
